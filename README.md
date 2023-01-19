@@ -1,6 +1,6 @@
 # Repository with useful jqPlot examples
 
-## What is jqPlot
+## What the hell is jqPlot?
 It is an old library to make plots with jQuery. You can take a look to the [official website](http://www.jqplot.com/)
 
 ## Why this repository exists?
