@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example of jqPlot where we overwrite some default styles</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./src/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.barRenderer.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.categoryAxisRenderer.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.pointLabels.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.highlighter.js"></script>
+    <link rel="stylesheet" type="text/css" href="./src/jquery.jqplot.min.css" />
+    <style type="text/css">
+        .jqplot-highlighter-tooltip {
+            border: 1px solid #ccc;
+            font-size: .75em;
+            white-space: nowrap;
+            background: #171717;
+            color: white;
+            padding: 1px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Example of jqPlot where we overwirte some jqplot styles</h1>
+    <p>In this case we don't like the tooltip css because it's too light and in some cases we cannot read it properly</p>
+    <p>In this example we added a custom style on the head of the html to overwrite the tooltip class with a better approach</p>
+    <div id="chart"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var plot2 = $.jqplot('chart', [
+                    [['PC', 2], ['Spectrum', 4], ['MSX',6], ['Mac',3]],
+                    [['PC', 5], ['Spectrum', 1], ['MSX',3], ['Mac',4]],
+                ],
+                {
+                seriesColors:['#2151a8', '#F5DE5D'],
+                seriesDefaults: {
+                    renderer:$.jqplot.BarRenderer,
+                    rendererOptions: {
+                        barDirection: 'vertical',
+                        barWidth: 15
+                    },
+                    varyBarColor: true
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer
+                    }
+                },
+                highlighter: {
+                    show: true,
+                    showMarker: false,
+                    tooltipLocation: 'n'
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
