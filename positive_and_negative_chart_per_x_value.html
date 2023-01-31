@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example of jqPlot with a negative and positive barchart per X value</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./src/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.barRenderer.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.categoryAxisRenderer.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.pointLabels.js"></script>
+    <link rel="stylesheet" type="text/css" href="./src/jquery.jqplot.min.css" />
+</head>
+<body>
+<h1>Example of jqPlot where there are one positive barhcart and a negative one for each X value</h1>
+<p> And every X barchart has a custom color.</p>
+<div id="chart"></div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var plot2 = $.jqplot('chart', [
+                [['PC', 2], ['Spectrum', 4], ['MSX', 6], ['Mac', 3]],
+                [['PC', -5], ['Spectrum', -1], ['MSX', -3], ['Mac', -4]],
+            ],
+            {
+                seriesColors:['#2151a8' ],
+                negativeSeriesColors: ['#F5DE5D'],
+                seriesDefaults: {
+                    renderer:$.jqplot.BarRenderer,
+                    rendererOptions: {
+                        barDirection: 'vertical',
+                        barWidth: 15,
+                        fillToZero: true,
+                    },
+                    varyBarColor: true
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer
+                    }
+                }
+            });
+    });
+
+</script>
+</body>
+</html>
