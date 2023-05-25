@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example of jqPlot with two series that can contain positive and negative values</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./src/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.barRenderer.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.categoryAxisRenderer.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.pointLabels.js"></script>
+    <link rel="stylesheet" type="text/css" href="./src/jquery.jqplot.min.css" />
+</head>
+<body>
+<h1>Example of jqPlot with two series that can contain positive and negative values</h1>
+<p> In this case we still have negative or positives values but we added a state, validated, that should appears different in case it is true or not</p>
+<p> So to represent that in some way we create two series: one with validated values, and another without them and assigned a lighter color to the not validated ones</p>
+<div id="chart"></div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var plot2 = $.jqplot('chart', [
+                [['Spectrum', 4], ['Mac', 3]], // Positive validated
+                [['PC', 2], ['MSX', 6]], // Positive not validated
+                [['MSX', -2], ['Mac', -1]], // Negative validated
+                [['PC', -5], ['Spectrum', -1]] // Negative not validated
+            ],
+            {
+                seriesColors:['#2151a8', '#90a8d3', '#F5DE5D', '#fbf1be' ],
+                negativeSeriesColors: ['#F5DE5D', '#fbf1be'],
+                seriesDefaults: {
+                    renderer:$.jqplot.BarRenderer,
+                    rendererOptions: {
+                        barDirection: 'vertical',
+                        barWidth: 15,
+                        fillToZero: true,
+                    },
+                    varyBarColor: true
+                },
+                legend: {
+                    show: true,
+                    placement: 'outsideGrid',
+                    location: 'ne',
+                    labels: ['Consumida', 'No validada', 'Generada', 'No validada'],
+                    showLabels: true
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer
+                    }
+                }
+            });
+    });
+
+</script>
+</body>
+</html>
