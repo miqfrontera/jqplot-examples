@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example of jqPlot with stacked barcharts</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./src/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.barRenderer.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.dateAxisRenderer.js"></script>
+    <script type="text/javascript" src="./src/plugins/jqplot.pointLabels.js"></script>
+    <link rel="stylesheet" type="text/css" href="./src/jquery.jqplot.min.css" />
+</head>
+<body>
+<h1>Example of jqPlot with up to four different stacked series</h1>
+<p>In this case I will try to solve a problem combining negative and positive stacked barcharts</p>
+<p>There are cases when the series is stacked with no reason without any other barchart below it and it seems like is "flying" or  is missing part of the barchart</p>
+<p>So after testing a lot finally I conclude that its important that all the series has the same number of points and to represent the absence of value put a 0</p>
+<div id="chart"></div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        var plot2 = $.jqplot('chart', [
+                [['2021-01-01 00:00', 4], ['2021-01-01 00:01', 3], ['2021-01-01 00:02', 0], ['2021-01-01 00:03', 0], ['2021-01-01 00:04', 0], ['2021-01-01 00:05', 0],['2021-01-01 00:06', 0], ['2021-01-01 00:07', 0]], // Positive validated
+                [['2021-01-01 00:00', 0], ['2021-01-01 00:01', 0], ['2021-01-01 00:02', 1], ['2021-01-01 00:03', 1], ['2021-01-01 00:04', 0], ['2021-01-01 00:05', 0],['2021-01-01 00:06', 0], ['2021-01-01 00:07', 0]], // Positive not validated
+                [['2021-01-01 00:00', -1], ['2021-01-01 00:01', -2], ['2021-01-01 00:02', 0], ['2021-01-01 00:03', 0], ['2021-01-01 00:04', 0], ['2021-01-01 00:05', 0],['2021-01-01 00:06', 0], ['2021-01-01 00:07', 0]], // Negative validated
+                [['2021-01-01 00:00', 0], ['2021-01-01 00:01', 0], ['2021-01-01 00:02', -2], ['2021-01-01 00:03', -2], ['2021-01-01 00:04', 0], ['2021-01-01 00:05', 0],['2021-01-01 00:06', 0], ['2021-01-01 00:07', 0]] // Negative not validated
+            ],
+            {
+                stackSeries: true,
+                seriesColors:['#2151a8', '#90a8d3', '#F5DE5D', '#fbf1be' ],
+                negativeSeriesColors: ['#F5DE5D', '#fbf1be'],
+                seriesDefaults: {
+                    renderer:$.jqplot.BarRenderer,
+                    rendererOptions: {
+                        barDirection: 'vertical',
+                        barWidth: 15,
+                        fillToZero: true,
+                    },
+                    varyBarColor: true,
+                },
+                legend: {
+                    show: true,
+                    placement: 'outsideGrid',
+                    location: 'ne',
+                    labels: ['Consumida', 'No validada', 'Generada', 'No validada'],
+                    showLabels: true
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.DateAxisRenderer
+                    }
+                }
+            });
+    });
+
+</script>
+</body>
+</html>
